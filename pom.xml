@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.avro.producer</groupId>
+    <artifactId>confluent-schema-registry</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <packaging>jar</packaging>
+
+    <properties>
+        <!-- Keep versions as properties to allow easy modification -->
+        <confluent.version>5.0.0</confluent.version>
+        <kafka.version>2.0.0-cp1</kafka.version>
+        <avro.version>1.8.2</avro.version>
+        <!-- Maven properties for compilation -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    </properties>
+    <repositories>
+        <repository>
+            <id>confluent</id>
+            <name>Confluent</name>
+            <url>https://packages.confluent.io/maven/</url>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>confluent</id>
+            <url>https://packages.confluent.io/maven/</url>
+        </pluginRepository>
+    </pluginRepositories>
+    <dependencies>
+        <!-- Add the Kafka dependencies -->
+        <dependency>
+            <groupId>io.confluent</groupId>
+            <artifactId>kafka-avro-serializer</artifactId>
+            <version>${confluent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka-clients</artifactId>
+            <version>${kafka.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.avro</groupId>
+            <artifactId>avro</artifactId>
+            <version>${avro.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.2.4</version>
+        </dependency>
+        <dependency>
+            <groupId>io.confluent</groupId>
+            <artifactId>kafka-connect-replicator</artifactId>
+            <version>${confluent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.twitter</groupId>
+            <artifactId>bijection-avro_2.10</artifactId>
+            <version>0.9.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>3.12.1</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.apache.spark/spark-core -->
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-core_2.11</artifactId>
+            <version>2.3.1</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.spark/spark-streaming -->
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-streaming_2.11</artifactId>
+            <version>2.3.1</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.spark/spark-streaming-kafka -->
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-streaming-kafka_2.10</artifactId>
+            <version>0.9.0-incubating</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.spark/spark-streaming-kafka-0-10 -->
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-streaming-kafka-0-10_2.10</artifactId>
+            <version>2.0.0</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.apache.spark/spark-streaming-kafka -->
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-streaming-kafka_2.11</artifactId>
+            <version>1.6.2</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.Fslf4j/slf4j-log4j12 -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <!-- Set the Java target version to 1.8 -->
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.0</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.avro</groupId>
+                <artifactId>avro-maven-plugin</artifactId>
+                <version>${avro.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-eclipse-plugin</artifactId>
+                <version>2.9</version>
+                <configuration>
+                    <downloadJavadocs>true</downloadJavadocs>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.puppycrawl.tools</groupId>
+                        <artifactId>checkstyle</artifactId>
+                        <version>8.12</version> <!-- bumping to latest checkstyle version -->
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+
+    </build>
+</project>
